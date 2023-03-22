@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter the Lakehouse</title>
+    <!-- Link to the Bootstrap CSS stylesheet -->
+    <link href="./css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+
+<style>
+
+.circle {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  padding: 10px;
+  background: #1B3139;
+  border: 3px solid #1B3139;
+  color: white;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+  margin: auto;
+}
+
+</style>
+<body>
+<main>
+    <div class="container mobile-container">
+        <!-- Databricks logo image -->
+        <a href="./index.html">
+            <div class="row">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png" style="width: 200px; margin: auto"  alt="Databricks Logo">
+            </div>
+        </a>
+        <div class="row" style="text-align: center">
+            <div class="col">
+                <div class="box">
+                    <h1>Your choice will now appear live!</h1>
+                    <h2>What's happening under the hood?</h2>
+                    <div>
+                        <div>Your message has been sent to a queue.</div>
+                        <div>A realtime DLT pipeline is consuming the data.</div>
+                        <div>A AI is called to filter inappropriate data.</div>
+                        <div>Thanks to lightspeed project, the data is available for insights in realtime.</div>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/live-demo-flow-full-small2.png" width="100%">
+                </div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center">
+            <form method="GET" action="./index.html">
+                <div class="col-12" style="padding: 30px 0px 50px 0px">
+                    <button type="submit" class="btn btn-primary">Submit another answer</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row text-reset legal-footer" style="font-size: 11px; text-align: center">
+            <div class="copyr">
+                © Databricks 2023. All rights reserved. Apache, Apache Spark, Spark and the Spark logo are trademarks of the Apache Software Foundation.<br/>
+            </div>
+            <div>
+                <a style="" href="https://www.databricks.com/legal/privacynotice">Privacy Notice (Updated)</a> | <a href="https://www.databricks.com/terms-of-use">Terms of Use</a> | <a href="https://www.databricks.com/legal/privacynotice#dbadditionalinformation">Your California Privacy RightsGlobal</a> <img alt="Global Privacy Control Icon" src="https://www.databricks.com/sites/default/files/2022-12/gpcicon_small.png" width="31px" >
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,628 @@
+
+{
+  "queries": [
+    {
+      "id": "ce94df59-fe4c-465e-a87f-45b5b020b509",
+      "name": "dbdemos_live_demo - min",
+      "description": null,
+      "query": "select min(unix_millis(inference_time) - unix_millis(lambda_time)) as `time_to_insight (ms)` from dbdemos_live.dbdemos_choice",
+      "options": {
+        "parent": "folders/4126749560510375",
+        "apply_auto_limit": true,
+        "folder_node_status": "ACTIVE",
+        "folder_node_internal_name": "tree/4126749560510462",
+        "visualization_control_order": [],
+        "catalog": "hive_metastore",
+        "schema": "dbdemos_live",
+        "parameters": []
+      },
+      "visualizations": [
+        {
+          "id": "c9f354dc-bee3-4ef6-9b3b-5d7dfd684642",
+          "type": "TABLE",
+          "name": "Results",
+          "description": "",
+          "options": {
+            "version": 2
+          },
+          "query_plan": null
+        },
+        {
+          "id": "fe3f2591-e025-4e5b-b663-5d016542f16c",
+          "type": "COUNTER",
+          "name": "min time to insight",
+          "description": "",
+          "options": {
+            "counterLabel": "Time from Ingestion & AI to insight",
+            "counterColName": "time_to_insight (ms)",
+            "rowNumber": 1,
+            "targetRowNumber": 1,
+            "stringDecimal": 0,
+            "stringDecChar": ".",
+            "stringThouSep": "",
+            "tooltipFormat": "0,0.000",
+            "stringPrefix": "",
+            "stringSuffix": " ms",
+            "condensed": true,
+            "withRowNumber": true
+          },
+          "query_plan": null
+        }
+      ]
+    },
+    {
+      "id": "c2259c5a-031a-4a06-94d3-9d25e28e4583",
+      "name": "dbdemos_live_demo - active users",
+      "description": null,
+      "query": "with last_30 AS (SELECT date_trunc(\"MINUTE\", from_unixtime(unix_millis(NOW())/1000 - number*60)) as time_1_min from (SELECT date_trunc(\"MINUTE\", NOW()), row_number() over (order by n) as number FROM (\n    SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL\n    SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL\n    SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL\n    SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL\n    SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL\n    SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL\n    SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL SELECT 1 AS n UNION ALL\n    SELECT 1 AS n UNION ALL SELECT 1 AS n))),\nactive_user as (\n\tselect * from (\n\t\tselect count(*) as active_users, date_trunc(\"MINUTE\", lambda_time) as time_1_min from dbdemos_live.dbdemos_choice where lambda_time > (now() - INTERVAL 60 minutes) group by time_1_min\n\t))\n\nselect time_1_min, coalesce(active_users, 0) as active_users from last_30 left join active_user using(time_1_min) ",
+      "options": {
+        "parent": "folders/1435603956186994",
+        "apply_auto_limit": true,
+        "folder_node_status": "ACTIVE",
+        "folder_node_internal_name": "tree/4126749560511486",
+        "visualization_control_order": [],
+        "catalog": "hive_metastore",
+        "schema": "dbdemos_live",
+        "parameters": []
+      },
+      "visualizations": [
+        {
+          "id": "a5edc690-3e4c-4f05-adf5-b09406205d62",
+          "type": "TABLE",
+          "name": "Results",
+          "description": "",
+          "options": {
+            "version": 2
+          },
+          "query_plan": null
+        },
+        {
+          "id": "ad1f506c-8ce8-46ea-b53f-6624675f6d8e",
+          "type": "CHART",
+          "name": "Active users",
+          "description": "",
+          "options": {
+            "version": 2,
+            "globalSeriesType": "column",
+            "sortX": true,
+            "sortY": true,
+            "legend": {
+              "traceorder": "normal"
+            },
+            "xAxis": {
+              "type": "-",
+              "labels": {
+                "enabled": true
+              },
+              "title": {
+                "text": "Time"
+              }
+            },
+            "yAxis": [
+              {
+                "type": "-",
+                "title": {
+                  "text": "Number of unique users"
+                }
+              },
+              {
+                "type": "-",
+                "opposite": true
+              }
+            ],
+            "alignYAxesAtZero": true,
+            "error_y": {
+              "type": "data",
+              "visible": true
+            },
+            "series": {
+              "stacking": null,
+              "error_y": {
+                "type": "data",
+                "visible": true
+              }
+            },
+            "seriesOptions": {
+              "column_7eb90b3567814": {
+                "name": "inference_time_min",
+                "yAxis": 0,
+                "type": "column",
+                "color": "#FB8D3D"
+              }
+            },
+            "valuesOptions": {},
+            "direction": {
+              "type": "counterclockwise"
+            },
+            "sizemode": "diameter",
+            "coefficient": 1,
+            "numberFormat": "0,0[.]00000",
+            "percentFormat": "0[.]00%",
+            "textFormat": "",
+            "missingValuesAsZero": true,
+            "useAggregationsUi": true,
+            "swappedAxes": false,
+            "dateTimeFormat": "YYYY-MM-DD HH:mm",
+            "showDataLabels": false,
+            "columnConfigurationMap": {
+              "x": {
+                "column": "time_1_min",
+                "id": "column_7eb90b35309670"
+              },
+              "y": [
+                {
+                  "column": "active_users",
+                  "id": "column_7eb90b3567814",
+                  "transform": "SUM"
+                }
+              ]
+            },
+            "isAggregationOn": true,
+            "condensed": true,
+            "withRowNumber": true
+          },
+          "query_plan": {
+            "selects": [
+              {
+                "column": "time_1_min"
+              },
+              {
+                "function": "SUM",
+                "args": [
+                  {
+                    "column": "active_users"
+                  }
+                ],
+                "alias": "column_7eb90b3567814"
+              }
+            ],
+            "groups": [
+              {
+                "column": "time_1_min"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "aebac8fb-5d93-4860-9d70-ef051336c9d3",
+      "name": "dbdemos_live_demo - all",
+      "description": null,
+      "query": "select *, unix_millis(inference_time) - unix_millis(lambda_time) as `time_to_insight (ms)` from dbdemos_live.dbdemos_choice order by `time_to_insight (ms)` ",
+      "options": {
+        "parent": "folders/4126749560510375",
+        "apply_auto_limit": true,
+        "folder_node_status": "ACTIVE",
+        "folder_node_internal_name": "tree/4126749560510376",
+        "visualization_control_order": [],
+        "parameters": []
+      },
+      "visualizations": [
+        {
+          "id": "2f19ebda-95c3-4d5f-9f1f-4b8af4e74766",
+          "type": "TABLE",
+          "name": "Results",
+          "description": "",
+          "options": {
+            "version": 2
+          },
+          "query_plan": null
+        },
+        {
+          "id": "9134ec82-fe16-4f38-bb66-2bce6d03b938",
+          "type": "CHART",
+          "name": "Current Choice",
+          "description": "",
+          "options": {
+            "version": 2,
+            "globalSeriesType": "pie",
+            "sortX": true,
+            "sortY": true,
+            "legend": {
+              "traceorder": "normal"
+            },
+            "xAxis": {
+              "type": "-",
+              "labels": {
+                "enabled": true
+              }
+            },
+            "yAxis": [
+              {
+                "type": "-"
+              },
+              {
+                "type": "-",
+                "opposite": true
+              }
+            ],
+            "alignYAxesAtZero": true,
+            "error_y": {
+              "type": "data",
+              "visible": true
+            },
+            "series": {
+              "stacking": null,
+              "error_y": {
+                "type": "data",
+                "visible": true
+              }
+            },
+            "seriesOptions": {
+              "column_7eb90b35330350": {
+                "yAxis": 0,
+                "type": "pie",
+                "name": "Choice"
+              }
+            },
+            "valuesOptions": {
+              "model-serving": {
+                "color": "#00A972"
+              },
+              "serverless-warehouse": {
+                "color": "#FFAB00"
+              },
+              "delta-live-table": {
+                "color": "#FF3621"
+              },
+              "unity-catalog": {
+                "color": "#FABFBA"
+              }
+            },
+            "direction": {
+              "type": "clockwise"
+            },
+            "sizemode": "diameter",
+            "coefficient": 1,
+            "numberFormat": "0,0[.]00000",
+            "percentFormat": "0[.]00%",
+            "textFormat": "",
+            "missingValuesAsZero": true,
+            "useAggregationsUi": true,
+            "swappedAxes": false,
+            "dateTimeFormat": "YYYY-MM-DD HH:mm",
+            "showDataLabels": true,
+            "columnConfigurationMap": {
+              "x": {
+                "column": "choice",
+                "id": "column_7eb90b35330348"
+              },
+              "y": [
+                {
+                  "id": "column_7eb90b35330350",
+                  "column": "*",
+                  "transform": "COUNT"
+                }
+              ]
+            },
+            "isAggregationOn": true,
+            "condensed": true,
+            "withRowNumber": true
+          },
+          "query_plan": {
+            "selects": [
+              {
+                "column": "choice"
+              },
+              {
+                "function": "COUNT",
+                "args": [
+                  {
+                    "column": "*"
+                  }
+                ],
+                "alias": "column_7eb90b35330350"
+              }
+            ],
+            "groups": [
+              {
+                "column": "choice"
+              }
+            ]
+          }
+        },
+        {
+          "id": "b2dd4cab-2c59-4591-9a97-db2f69bb81e8",
+          "type": "WORD_CLOUD",
+          "name": "Pseudo activity",
+          "description": "",
+          "options": {
+            "column": "pseudo",
+            "frequenciesColumn": "",
+            "wordLengthLimit": {
+              "min": null,
+              "max": null
+            },
+            "wordCountLimit": {
+              "min": null,
+              "max": null
+            },
+            "condensed": true,
+            "withRowNumber": true
+          },
+          "query_plan": null
+        }
+      ]
+    },
+    {
+      "id": "d2573494-bb62-41c5-83ad-6b48242e84d3",
+      "name": "dbdemos_live_demo - fraud",
+      "description": null,
+      "query": "select predictions, count(*) from dbdemos_live.dbdemos_choice group by predictions",
+      "options": {
+        "parent": "folders/1435603956186994",
+        "apply_auto_limit": true,
+        "folder_node_status": "ACTIVE",
+        "folder_node_internal_name": "tree/4126749560533707",
+        "visualization_control_order": [],
+        "catalog": "hive_metastore",
+        "schema": "dbdemos_live",
+        "parameters": []
+      },
+      "visualizations": [
+        {
+          "id": "58751622-5076-4491-8962-9c26f39d732e",
+          "type": "TABLE",
+          "name": "Results",
+          "description": "",
+          "options": {
+            "version": 2
+          },
+          "query_plan": null
+        },
+        {
+          "id": "ce5c6a5e-bdf6-4e31-8097-38cc86279dea",
+          "type": "CHART",
+          "name": "Pie 1",
+          "description": "",
+          "options": {
+            "version": 2,
+            "globalSeriesType": "pie",
+            "sortX": true,
+            "sortY": true,
+            "legend": {
+              "traceorder": "normal"
+            },
+            "xAxis": {
+              "type": "-",
+              "labels": {
+                "enabled": true
+              }
+            },
+            "yAxis": [
+              {
+                "type": "-"
+              },
+              {
+                "type": "-",
+                "opposite": true
+              }
+            ],
+            "alignYAxesAtZero": true,
+            "error_y": {
+              "type": "data",
+              "visible": true
+            },
+            "series": {
+              "stacking": null,
+              "error_y": {
+                "type": "data",
+                "visible": true
+              }
+            },
+            "seriesOptions": {
+              "column_9c62d65d17546": {
+                "name": "Fraudulent submission (AI model)",
+                "yAxis": 0,
+                "type": "pie"
+              }
+            },
+            "valuesOptions": {},
+            "direction": {
+              "type": "counterclockwise"
+            },
+            "sizemode": "diameter",
+            "coefficient": 1,
+            "numberFormat": "0,0[.]00000",
+            "percentFormat": "0[.]00%",
+            "textFormat": "",
+            "missingValuesAsZero": true,
+            "useAggregationsUi": true,
+            "swappedAxes": false,
+            "dateTimeFormat": "YYYY-MM-DD HH:mm",
+            "showDataLabels": true,
+            "columnConfigurationMap": {
+              "x": {
+                "column": "predictions",
+                "id": "column_9c62d65d17545"
+              },
+              "y": [
+                {
+                  "column": "count(1)",
+                  "transform": "SUM",
+                  "id": "column_9c62d65d17546"
+                }
+              ]
+            },
+            "isAggregationOn": true
+          },
+          "query_plan": {
+            "selects": [
+              {
+                "column": "predictions"
+              },
+              {
+                "function": "SUM",
+                "args": [
+                  {
+                    "column": "count(1)"
+                  }
+                ],
+                "alias": "column_9c62d65d17546"
+              }
+            ],
+            "groups": [
+              {
+                "column": "predictions"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "dashboard": {
+    "id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
+    "name": "dbdemos - live_demo dashboard",
+    "widgets": [
+      {
+        "id": "2429e6c1-0804-4e63-8717-55d39884af52",
+        "width": 1,
+        "options": {
+          "parameterMappings": {},
+          "title": "Activity & main users",
+          "description": "",
+          "isHidden": false,
+          "position": {
+            "autoHeight": false,
+            "sizeX": 2,
+            "sizeY": 4,
+            "minSizeX": 1,
+            "maxSizeX": 6,
+            "minSizeY": 1,
+            "maxSizeY": 1000,
+            "col": 2,
+            "row": 5
+          }
+        },
+        "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
+        "text": "",
+        "visualization_id": "b2dd4cab-2c59-4591-9a97-db2f69bb81e8"
+      },
+      {
+        "id": "8d695437-df64-47ea-9542-0b55ded88e8b",
+        "width": 1,
+        "options": {
+          "parameterMappings": {},
+          "title": "Time to insight",
+          "description": "From the moment you clicked on the app to this dashboard",
+          "isHidden": false,
+          "position": {
+            "autoHeight": false,
+            "sizeX": 2,
+            "sizeY": 5,
+            "minSizeX": 1,
+            "maxSizeX": 6,
+            "minSizeY": 1,
+            "maxSizeY": 1000,
+            "col": 2,
+            "row": 0
+          }
+        },
+        "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
+        "text": "",
+        "visualization_id": "fe3f2591-e025-4e5b-b663-5d016542f16c"
+      },
+      {
+        "id": "f506c407-f43c-4750-9908-45c2eed92297",
+        "width": 1,
+        "options": {
+          "isHidden": false,
+          "position": {
+            "autoHeight": false,
+            "sizeX": 2,
+            "sizeY": 17,
+            "minSizeX": 1,
+            "maxSizeX": 6,
+            "minSizeY": 1,
+            "maxSizeY": 1000,
+            "col": 0,
+            "row": 0
+          },
+          "parameterMappings": {}
+        },
+        "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
+        "text": "# Real Time Analytics with Databricks\n\n## From Ingestion & ML inferences to insight\nPowered by DLT & Project Lightspeed, this pipeline consumes data in realtime, run ML inferences fo filter fraudulent answer and save the output for real time insight.\n\n![img](https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/live-demo-flow-full-small2.png)"
+      },
+      {
+        "id": "2330dfe5-bd3e-4d6c-90d5-89bceac511db",
+        "width": 1,
+        "options": {
+          "parameterMappings": {},
+          "title": "Live Active users",
+          "description": "",
+          "isHidden": false,
+          "position": {
+            "autoHeight": false,
+            "sizeX": 2,
+            "sizeY": 10,
+            "minSizeX": 1,
+            "maxSizeX": 6,
+            "minSizeY": 5,
+            "maxSizeY": 1000,
+            "col": 4,
+            "row": 7
+          }
+        },
+        "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
+        "text": "",
+        "visualization_id": "ad1f506c-8ce8-46ea-b53f-6624675f6d8e"
+      },
+      {
+        "id": "77d38d5b-305a-489a-a319-97ad4a0caf5e",
+        "width": 1,
+        "options": {
+          "parameterMappings": {},
+          "title": "Product choice",
+          "description": "",
+          "isHidden": false,
+          "position": {
+            "autoHeight": false,
+            "sizeX": 2,
+            "sizeY": 8,
+            "minSizeX": 1,
+            "maxSizeX": 6,
+            "minSizeY": 5,
+            "maxSizeY": 1000,
+            "col": 2,
+            "row": 9
+          }
+        },
+        "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
+        "text": "",
+        "visualization_id": "9134ec82-fe16-4f38-bb66-2bce6d03b938"
+      },
+      {
+        "id": "50d5dfa3-b5ce-4433-b732-15e7aa8eeb0f",
+        "width": 1,
+        "options": {
+          "parameterMappings": {},
+          "title": "Fraudulent user - ML inference",
+          "description": "",
+          "isHidden": false,
+          "position": {
+            "autoHeight": false,
+            "sizeX": 2,
+            "sizeY": 7,
+            "minSizeX": 1,
+            "maxSizeX": 6,
+            "minSizeY": 5,
+            "maxSizeY": 1000,
+            "col": 4,
+            "row": 0
+          }
+        },
+        "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
+        "text": "",
+        "visualization_id": "ce5c6a5e-bdf6-4e31-8097-38cc86279dea"
+      }
+    ],
+    "tags": [],
+    "color_palette": null,
+    "dashboard_filters_enabled": false,
+    "parent": "folders/1435603956186994",
+    "is_archived": false
+  },
+  "version": "1.0"
+}

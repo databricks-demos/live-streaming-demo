@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #FFFFFF;
+  padding: 10px;
+}
+
+main {
+  background-color: #F0F0F0;
+  min-height: 100vh;
+  padding: 20px 0;
+}
+
+.container {
+  max-width: 800px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+p {
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}

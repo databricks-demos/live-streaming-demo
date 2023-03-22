@@ -1,0 +1,39 @@
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    color: #FFF !important;
+}
+
+.btn {
+    --bs-btn-border-radius: 0rem !important;
+}
+
+.mobile-container {
+    max-width: 700px !important;
+}
+
+.box {
+    box-shadow: 0 .15rem 1.15rem 0 rgba(58,59,69,.15)!important; padding: 20px; margin-top: 20px;
+}
+
+.box-choice {
+    height: 300px;
+}
+
+
+body {
+    font-family: "DM Sans",sans-serif  !important;
+    color: #1B3139  !important;
+}
+
+.box_description {
+    color: #685d77;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    /*font-style: oblique;*/
+}
+
+$primary: #FF3621;
+$secondary: #143d4a;
+
+$bs-body-color: #1B3139;
+
+@import "../node_modules/bootstrap/scss/bootstrap";

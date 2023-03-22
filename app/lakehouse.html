@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter the Lakehouse</title>
+    <!-- Link to the Bootstrap CSS stylesheet -->
+    <link href="./css/custom.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $(".box-choice").click(function(e) {
+            $(this).toggleClass("selected")
+        });
+
+        $("#submit-choice").click(function(e) {
+            e.preventDefault()
+            choices = []
+            $(".box-choice.selected").each(function() {
+                choices.push($(this).attr("choice"))
+            });
+            choices = choices.join(",")
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const pseudonym = urlParams.get('pseudonym')
+            url = "https://sii3xufpok5y464etwr3qv3qy40zuzme.lambda-url.us-east-2.on.aws/?choice="+choices+"&pseudo="+pseudonym
+            $.get(url, function( data ) {
+                location.href = './lakehouse-summary.html';
+            });
+        });
+    });
+
+</script>
+
+<style>
+    .box-choice:hover {
+     cursor: pointer;
+    }
+
+    .box-choice {
+            border: 10px solid white;
+    }
+
+    .box-choice.selected {
+            border: 10px solid orange !important;
+    }
+
+</style>
+<body>
+<main>
+    <div class="container mobile-container">
+        <!-- Databricks logo image -->
+        <a href="./index.html">
+            <div class="row">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/63/Databricks_Logo.png" style="width: 200px; margin: auto"  alt="Databricks Logo">
+            </div>
+        </a>
+        <div class="row" style="text-align: center">
+            <div class="col">
+                <div class="box">
+                    <h1>Select what you're most excited to learn about</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="text-align: center">
+            <div class="col-12">
+                <div class="box box-choice" choice="unity-catalog">
+                    <h2>Unity Catalog</h2>
+                    <img height="100px" src="https://www.databricks.com/en-website-assets/static/c0c1c53cef9c5acbd7522a16fa5ab029/secondary-icon-graphic-14.svg" />
+                    <div class="box_description">
+                        <strong>Security & Governance for all your data assets.</strong> <br/>Fine grain ACL, Lineage, Audit log.
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="box box-choice" choice="delta-live-table">
+                    <h2>Delta Live Table</h2>
+                    <img height="100px" src="./image/dlt-logo.png" />
+                    <div class="box_description">
+                        <strong>Simple ingestion & ETL.</strong> <br/>Streaming, low latency & data quality with the best TCO.
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="box box-choice" choice="model-serving">
+                    <h2>Model Serving</h2>
+                    <div style="height: 100px">
+                        <svg style="height: 100px" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 2C5.77786 2 3.91293 3.52534 3.39373 5.58639C1.45669 5.98279 0 7.69604 0 9.75C0 11.9526 1.67511 13.7633 3.8214 13.9786C3.87864 13.9926 3.93845 14 4 14V12.4888C2.59873 12.3629 1.5 11.1845 1.5 9.75C1.5 8.28952 2.63892 7.09448 4.07651 7.00536C4.43704 6.98301 4.73041 6.70685 4.7745 6.34833C4.97186 4.74324 6.34131 3.5 8 3.5C9.79493 3.5 11.25 4.95507 11.25 6.75V7.25C11.25 7.66421 11.5858 8 12 8H12.25C13.0301 8 13.7175 8.39701 14.1211 9H15.7866C15.3247 7.69323 14.1591 6.7189 12.7451 6.5324C12.6314 4.01005 10.5504 2 8 2Z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M8 8.5C8.41421 8.5 8.75 8.83579 8.75 9.25C8.75 9.66421 8.41421 10 8 10C7.58579 10 7.25 9.66421 7.25 9.25C7.25 8.83579 7.58579 8.5 8 8.5ZM10.25 9.25C10.25 8.00736 9.24264 7 8 7C6.75736 7 5.75 8.00736 5.75 9.25C5.75 10.4926 6.75736 11.5 8 11.5C8.34736 11.5 8.67634 11.4213 8.97006 11.2807L9.46928 11.7799C9.32871 12.0737 9.25 12.4026 9.25 12.75C9.25 13.9926 10.2574 15 11.5 15C12.7426 15 13.75 13.9926 13.75 12.75C13.75 11.5074 12.7426 10.5 11.5 10.5C11.1526 10.5 10.8237 10.5787 10.5299 10.7193L10.0307 10.2201C10.1713 9.92634 10.25 9.59736 10.25 9.25ZM11.5 12C11.9142 12 12.25 12.3358 12.25 12.75C12.25 13.1642 11.9142 13.5 11.5 13.5C11.0858 13.5 10.75 13.1642 10.75 12.75C10.75 12.3358 11.0858 12 11.5 12Z"></path></svg>
+                    </div>
+                    <div class="box_description">
+                        <strong>Serverless inferences</strong> <br/>Deploy your models for real-time inferences.
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="box box-choice" choice="serverless-warehouse">
+                    <h2>Serverless Warehouse</h2>
+                    <img height="100px" src="./image/dbsql-dashboard.png" />
+                    <div class="box_description">
+                        <strong>Instant stop & start.</strong> <br/>Low latency, high concurrency BI workload with the best TCO.
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                </div>
+            </div>
+
+            <div class="col-12" style="padding: 30px 0px 50px 0px">
+                <button id="submit-choice" type="submit" class="btn btn-primary">Submit your choices</button>
+            </div>
+
+            <div class="row text-reset legal-footer" style="font-size: 11px">
+                <div class="copyr">
+                    © Databricks 2023. All rights reserved. Apache, Apache Spark, Spark and the Spark logo are trademarks of the Apache Software Foundation.<br/>
+                </div>
+                <div>
+                    <a style="" href="https://www.databricks.com/legal/privacynotice">Privacy Notice (Updated)</a> | <a href="https://www.databricks.com/terms-of-use">Terms of Use</a> | <a href="https://www.databricks.com/legal/privacynotice#dbadditionalinformation">Your California Privacy RightsGlobal</a> <img alt="Global Privacy Control Icon" src="https://www.databricks.com/sites/default/files/2022-12/gpcicon_small.png" width="31px" >
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>
