@@ -13,7 +13,7 @@
   margin-top: 20px; }
 
 .box-choice {
-  height: 300px; }
+  min-height: 380px; }
 
 body {
   font-family: "DM Sans",sans-serif  !important;
@@ -8410,3 +8410,11 @@ textarea.form-control-lg {
     display: inline-flex !important; }
   .d-print-none {
     display: none !important; } }
+
+@media (min-width: 500px) {
+  h1, .h1, .h1 {
+    font-size: 3.5rem; }
+  h2, .h2, .h1 {
+    font-size: 2.8rem; }
+  .mobile-container, .mobile-container input, .btn {
+    font-size: 1.5rem; } }
