@@ -17,3 +17,7 @@ Please do not submit personal information using this demo (use the generated pse
 Data is purged after demos and the ML model will only keep pseudonyms having a firstname only.
 
 Only the pseudonym and your item choice are submitted to the demo.
+
+
+### Dataset used
+The List of firstname used by the ML model is from https://www.data.gouv.fr/fr/datasets/liste-de-prenoms-et-patronymes/ - under Open Licence version 2.0
