@@ -1,0 +1,32 @@
+{
+    "clusters": [
+        {
+            "label": "default",
+            "aws_attributes": {
+                "instance_profile_arn": "arn:aws:iam::<AWS_ACCOUNT>:instance-profile/<INSTANCE_PROFILE_TO_READ_FROM_KINESIS>"
+            },
+            "num_workers": 1
+        },
+        {
+            "label": "maintenance",
+            "aws_attributes": {
+                "instance_profile_arn": "arn:aws:iam::<AWS_ACCOUNT>:instance-profile/<INSTANCE_PROFILE_TO_READ_FROM_KINESIS>"
+            }
+        }
+    ],
+    "development": true,
+    "continuous": true,
+    "channel": "CURRENT",
+    "edition": "ADVANCED",
+    "photon": true,
+    "libraries": [
+        {
+            "notebook": {
+                "path": "/Workspace/Repos/quentin.ambard@databricks.com/live-streaming-demo/pipeline/DLT-ingestion-dbdemos-live"
+            }
+        }
+    ],
+    "name": "dbdemos_live_streaming_pipeline",
+    "storage": "dbfs:/dbdemos/live_demo/dlt",
+    "target": "dbdemos_live"
+}
