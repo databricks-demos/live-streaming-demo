@@ -31,6 +31,9 @@ body {
   background-color: #827694 !important;
   transform: translateY(2px); }
 
+.btn-primary {
+  padding: 20px 30px !important; }
+
 .btn-primary:active {
   background-color: #ff6b5c !important;
   transform: translateY(2px); }
