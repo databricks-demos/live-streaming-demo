@@ -12,6 +12,10 @@
     $( document ).ready(function() {
         $(".box-choice").click(function(e) {
             $(this).toggleClass("selected")
+            choice = $(this).attr('choice')
+            $("div[choice='"+choice+"'] .add_to_selection").toggleClass("hidden")
+            $("div[choice='"+choice+"'] .added_to_selection").toggleClass("hidden")
+
         });
 
         $("#submit-choice").click(function(e) {
@@ -20,20 +24,26 @@
             $(".box-choice.selected").each(function() {
                 choices.push($(this).attr("choice"))
             });
-            choices = choices.join(",")
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const pseudonym = urlParams.get('pseudonym')
-            url = "https://sii3xufpok5y464etwr3qv3qy40zuzme.lambda-url.us-east-2.on.aws/?choice="+choices+"&pseudo="+pseudonym
-            $.get(url, function( data ) {
-                location.href = './lakehouse-summary.html';
-            });
+            if (choices.length>0){
+                $("#submit-choice").text("...")
+                choices = choices.join(",")
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const pseudonym = urlParams.get('pseudonym')
+                url = "https://sii3xufpok5y464etwr3qv3qy40zuzme.lambda-url.us-east-2.on.aws/?choice="+choices+"&pseudo="+pseudonym
+                $.get(url, function( data ) {
+                    location.href = './lakehouse-summary.html';
+                });
+            }
         });
     });
 
 </script>
 
 <style>
+    .hidden {
+        display: none;
+    }
     .box-choice:hover {
      cursor: pointer;
     }
@@ -71,7 +81,8 @@
                     <div class="box_description">
                         <strong>Security & Governance for all your data assets.</strong> <br/>Fine grain ACL, Lineage, Audit log.
                     </div>
-                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                    <button type="submit" class="btn btn-secondary add_to_selection">Add to selection</button>
+                    <button type="submit" class="btn btn-light added_to_selection hidden">Remove from selection</button>
                 </div>
             </div>
             <div class="col-12">
@@ -81,7 +92,8 @@
                     <div class="box_description">
                         <strong>Simple ingestion & ETL.</strong> <br/>Streaming, low latency & data quality with the best TCO.
                     </div>
-                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                    <button type="submit" class="btn btn-secondary add_to_selection">Add to selection</button>
+                    <button type="submit" class="btn btn-light added_to_selection hidden">Remove from selection</button>
                 </div>
             </div>
             <div class="col-12">
@@ -93,7 +105,8 @@
                     <div class="box_description">
                         <strong>Serverless inferences</strong> <br/>Deploy your models for real-time inferences.
                     </div>
-                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                    <button type="submit" class="btn btn-secondary add_to_selection">Add to selection</button>
+                    <button type="submit" class="btn btn-light added_to_selection hidden">Remove from selection</button>
                 </div>
             </div>
             <div class="col-12">
@@ -103,12 +116,13 @@
                     <div class="box_description">
                         <strong>Instant stop & start.</strong> <br/>Low latency, high concurrency BI workload with the best TCO.
                     </div>
-                    <button type="submit" class="btn btn-secondary">Add to selection</button>
+                    <button type="submit" class="btn btn-secondary add_to_selection">Add to selection</button>
+                    <button type="submit" class="btn btn-light added_to_selection hidden">Remove from selection</button>
                 </div>
             </div>
 
             <div class="col-12" style="padding: 30px 0px 50px 0px">
-                <button id="submit-choice" type="submit" class="btn btn-primary">Submit your choices</button>
+                <button id="submit-choice" type="submit" class="btn btn-primary btn-lg">Submit your choices</button>
             </div>
 
             <div class="row text-reset legal-footer" style="font-size: 11px">
