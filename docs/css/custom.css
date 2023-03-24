@@ -5,7 +5,9 @@
   --bs-btn-border-radius: 0rem !important; }
 
 .mobile-container {
-  max-width: 700px !important; }
+  max-width: 900px !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important; }
 
 .box {
   box-shadow: 0 0.15rem 1.15rem 0 rgba(58, 59, 69, 0.15) !important;
@@ -24,6 +26,14 @@ body {
   padding-top: 5px;
   padding-bottom: 10px;
   /*font-style: oblique;*/ }
+
+.btn-secondary:active {
+  background-color: #827694 !important;
+  transform: translateY(2px); }
+
+.btn-primary:active {
+  background-color: #ff6b5c !important;
+  transform: translateY(2px); }
 
 /*!
    * Bootstrap  v5.2.3 (https://getbootstrap.com/)
@@ -8417,4 +8427,4 @@ textarea.form-control-lg {
   h2, .h2, .h1 {
     font-size: 2.8rem; }
   .mobile-container, .mobile-container input, .btn {
-    font-size: 1.5rem; } }
+    font-size: 2rem; } }

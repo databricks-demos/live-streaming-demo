@@ -7,7 +7,9 @@
 }
 
 .mobile-container {
-    max-width: 700px !important;
+    max-width: 900px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
 }
 
 .box {
@@ -35,6 +37,18 @@ body {
 $primary: #FF3621;
 $secondary: #143d4a;
 
+.btn-secondary:active {
+  background-color: #827694 !important;
+  transform: translateY(2px);
+}
+
+.btn-primary:active {
+  background-color: #ff6b5c !important;
+  transform: translateY(2px);
+}
+
+
+
 $bs-body-color: #1B3139;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
@@ -49,6 +63,6 @@ $bs-body-color: #1B3139;
     }
 
     .mobile-container, .mobile-container input, .btn {
-      font-size: 1.5rem;
+      font-size: 2rem;
     }
 }
