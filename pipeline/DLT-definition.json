@@ -22,7 +22,7 @@
     "libraries": [
         {
             "notebook": {
-                "path": "/Workspace/Repos/live-dbdemos/live-streaming-demo/pipeline/DLT-ingestion-dbdemos-live"
+                "path": "/Repos/live-dbdemos/live-streaming-demo/pipeline/DLT-ingestion-dbdemos-live"
             }
         }
     ],
