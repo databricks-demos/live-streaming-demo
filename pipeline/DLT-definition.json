@@ -22,7 +22,7 @@
     "libraries": [
         {
             "notebook": {
-                "path": "/Workspace/Repos/quentin.ambard@databricks.com/live-streaming-demo/pipeline/DLT-ingestion-dbdemos-live"
+                "path": "/Workspace/Repos/live-dbdemos/live-streaming-demo/pipeline/DLT-ingestion-dbdemos-live"
             }
         }
     ],
