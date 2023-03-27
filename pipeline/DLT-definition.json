@@ -11,6 +11,11 @@
             "label": "maintenance",
             "aws_attributes": {
                 "instance_profile_arn": "arn:aws:iam::<AWS_ACCOUNT>:instance-profile/<INSTANCE_PROFILE_TO_READ_FROM_KINESIS>"
+            },
+             "custom_tags": {
+                "project": "dbdemos",
+                "Owner": "quentin.ambard@databricks.com",
+                "KeepAlive": "True"
             }
         }
     ],
