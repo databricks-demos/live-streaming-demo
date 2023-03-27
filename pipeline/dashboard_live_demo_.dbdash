@@ -542,7 +542,7 @@
           "parameterMappings": {}
         },
         "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
-        "text": "# live.dbdemos.ai\n## Real-time Analytics with Databricks\n\n### From Ingestion & ML inferences to insight\nPowered by DLT & Project Lightspeed, this pipeline consumes data in realtime, run ML inferences fo filter fraudulent answer and save the output for real time insight.\n\n![img](https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/live-demo-flow-full-small2.png)"
+        "text": "# live.dbdemos.ai\n## Real-time Analytics with Databricks\n\n### From Ingestion & ML inferences to insight\nPowered by DLT & Project Lightspeed, this pipeline consumes data in realtime, run ML inferences fo filter fraudulent answer and save the output for real time insight.\n\n![img](https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/live-demo-flow-full.png)"
       },
       {
         "id": "2330dfe5-bd3e-4d6c-90d5-89bceac511db",
