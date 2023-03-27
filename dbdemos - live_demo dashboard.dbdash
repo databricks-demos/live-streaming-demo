@@ -1,16 +1,15 @@
-
 {
   "queries": [
     {
-      "id": "ce94df59-fe4c-465e-a87f-45b5b020b509",
-      "name": "dbdemos_live_demo - min",
+      "id": "d2573494-bb62-41c5-83ad-6b48242e84d3",
+      "name": "dbdemos_live_demo - fraud",
       "description": null,
-      "query": "select min(unix_millis(inference_time) - unix_millis(lambda_time)) as `time_to_insight (ms)` from dbdemos_live.dbdemos_choice",
+      "query": "select predictions, count(*) from dbdemos_live.dbdemos_choice group by predictions",
       "options": {
-        "parent": "folders/4126749560510375",
+        "parent": "folders/1435603956186994",
         "apply_auto_limit": true,
         "folder_node_status": "ACTIVE",
-        "folder_node_internal_name": "tree/4126749560510462",
+        "folder_node_internal_name": "tree/4126749560533707",
         "visualization_control_order": [],
         "catalog": "hive_metastore",
         "schema": "dbdemos_live",
@@ -18,7 +17,7 @@
       },
       "visualizations": [
         {
-          "id": "c9f354dc-bee3-4ef6-9b3b-5d7dfd684642",
+          "id": "58751622-5076-4491-8962-9c26f39d732e",
           "type": "TABLE",
           "name": "Results",
           "description": "",
@@ -28,25 +27,102 @@
           "query_plan": null
         },
         {
-          "id": "fe3f2591-e025-4e5b-b663-5d016542f16c",
-          "type": "COUNTER",
-          "name": "min time to insight",
+          "id": "ce5c6a5e-bdf6-4e31-8097-38cc86279dea",
+          "type": "CHART",
+          "name": "Pie 1",
           "description": "",
           "options": {
-            "counterLabel": "Time from Ingestion & AI to insight",
-            "counterColName": "time_to_insight (ms)",
-            "rowNumber": 1,
-            "targetRowNumber": 1,
-            "stringDecimal": 0,
-            "stringDecChar": ".",
-            "stringThouSep": "",
-            "tooltipFormat": "0,0.000",
-            "stringPrefix": "",
-            "stringSuffix": " ms",
-            "condensed": true,
-            "withRowNumber": true
+            "version": 2,
+            "globalSeriesType": "pie",
+            "sortX": true,
+            "sortY": true,
+            "legend": {
+              "traceorder": "normal"
+            },
+            "xAxis": {
+              "type": "-",
+              "labels": {
+                "enabled": true
+              }
+            },
+            "yAxis": [
+              {
+                "type": "-"
+              },
+              {
+                "type": "-",
+                "opposite": true
+              }
+            ],
+            "alignYAxesAtZero": true,
+            "error_y": {
+              "type": "data",
+              "visible": true
+            },
+            "series": {
+              "stacking": null,
+              "error_y": {
+                "type": "data",
+                "visible": true
+              }
+            },
+            "seriesOptions": {
+              "column_9c62d65d17546": {
+                "name": "Fraudulent submission (AI model)",
+                "yAxis": 0,
+                "type": "pie"
+              }
+            },
+            "valuesOptions": {},
+            "direction": {
+              "type": "counterclockwise"
+            },
+            "sizemode": "diameter",
+            "coefficient": 1,
+            "numberFormat": "0,0[.]00000",
+            "percentFormat": "0[.]00%",
+            "textFormat": "",
+            "missingValuesAsZero": true,
+            "useAggregationsUi": true,
+            "swappedAxes": false,
+            "dateTimeFormat": "YYYY-MM-DD HH:mm",
+            "showDataLabels": true,
+            "columnConfigurationMap": {
+              "x": {
+                "column": "predictions",
+                "id": "column_9c62d65d17545"
+              },
+              "y": [
+                {
+                  "column": "count(1)",
+                  "transform": "SUM",
+                  "id": "column_9c62d65d17546"
+                }
+              ]
+            },
+            "isAggregationOn": true
           },
-          "query_plan": null
+          "query_plan": {
+            "selects": [
+              {
+                "column": "predictions"
+              },
+              {
+                "function": "SUM",
+                "args": [
+                  {
+                    "column": "count(1)"
+                  }
+                ],
+                "alias": "column_9c62d65d17546"
+              }
+            ],
+            "groups": [
+              {
+                "column": "predictions"
+              }
+            ]
+          }
         }
       ]
     },
@@ -189,7 +265,7 @@
       "id": "aebac8fb-5d93-4860-9d70-ef051336c9d3",
       "name": "dbdemos_live_demo - all",
       "description": null,
-      "query": "select *, unix_millis(inference_time) - unix_millis(lambda_time) as `time_to_insight (ms)` from dbdemos_live.dbdemos_choice order by `time_to_insight (ms)` ",
+      "query": "select *, unix_millis(inference_time) - unix_millis(lambda_time) as `time_to_insight (ms)` from dbdemos_live.dbdemos_choice  where predictions order by `time_to_insight (ms)`",
       "options": {
         "parent": "folders/4126749560510375",
         "apply_auto_limit": true,
@@ -346,15 +422,15 @@
       ]
     },
     {
-      "id": "d2573494-bb62-41c5-83ad-6b48242e84d3",
-      "name": "dbdemos_live_demo - fraud",
+      "id": "ce94df59-fe4c-465e-a87f-45b5b020b509",
+      "name": "dbdemos_live_demo - min",
       "description": null,
-      "query": "select predictions, count(*) from dbdemos_live.dbdemos_choice group by predictions",
+      "query": "select min(unix_millis(inference_time) - unix_millis(lambda_time)) as `time_to_insight (ms)` from dbdemos_live.dbdemos_choice",
       "options": {
-        "parent": "folders/1435603956186994",
+        "parent": "folders/4126749560510375",
         "apply_auto_limit": true,
         "folder_node_status": "ACTIVE",
-        "folder_node_internal_name": "tree/4126749560533707",
+        "folder_node_internal_name": "tree/4126749560510462",
         "visualization_control_order": [],
         "catalog": "hive_metastore",
         "schema": "dbdemos_live",
@@ -362,7 +438,7 @@
       },
       "visualizations": [
         {
-          "id": "58751622-5076-4491-8962-9c26f39d732e",
+          "id": "c9f354dc-bee3-4ef6-9b3b-5d7dfd684642",
           "type": "TABLE",
           "name": "Results",
           "description": "",
@@ -372,102 +448,25 @@
           "query_plan": null
         },
         {
-          "id": "ce5c6a5e-bdf6-4e31-8097-38cc86279dea",
-          "type": "CHART",
-          "name": "Pie 1",
+          "id": "fe3f2591-e025-4e5b-b663-5d016542f16c",
+          "type": "COUNTER",
+          "name": "min time to insight",
           "description": "",
           "options": {
-            "version": 2,
-            "globalSeriesType": "pie",
-            "sortX": true,
-            "sortY": true,
-            "legend": {
-              "traceorder": "normal"
-            },
-            "xAxis": {
-              "type": "-",
-              "labels": {
-                "enabled": true
-              }
-            },
-            "yAxis": [
-              {
-                "type": "-"
-              },
-              {
-                "type": "-",
-                "opposite": true
-              }
-            ],
-            "alignYAxesAtZero": true,
-            "error_y": {
-              "type": "data",
-              "visible": true
-            },
-            "series": {
-              "stacking": null,
-              "error_y": {
-                "type": "data",
-                "visible": true
-              }
-            },
-            "seriesOptions": {
-              "column_9c62d65d17546": {
-                "name": "Fraudulent submission (AI model)",
-                "yAxis": 0,
-                "type": "pie"
-              }
-            },
-            "valuesOptions": {},
-            "direction": {
-              "type": "counterclockwise"
-            },
-            "sizemode": "diameter",
-            "coefficient": 1,
-            "numberFormat": "0,0[.]00000",
-            "percentFormat": "0[.]00%",
-            "textFormat": "",
-            "missingValuesAsZero": true,
-            "useAggregationsUi": true,
-            "swappedAxes": false,
-            "dateTimeFormat": "YYYY-MM-DD HH:mm",
-            "showDataLabels": true,
-            "columnConfigurationMap": {
-              "x": {
-                "column": "predictions",
-                "id": "column_9c62d65d17545"
-              },
-              "y": [
-                {
-                  "column": "count(1)",
-                  "transform": "SUM",
-                  "id": "column_9c62d65d17546"
-                }
-              ]
-            },
-            "isAggregationOn": true
+            "counterLabel": "Time from Ingestion & AI to insight",
+            "counterColName": "time_to_insight (ms)",
+            "rowNumber": 1,
+            "targetRowNumber": 1,
+            "stringDecimal": 0,
+            "stringDecChar": ".",
+            "stringThouSep": "",
+            "tooltipFormat": "0,0.000",
+            "stringPrefix": "",
+            "stringSuffix": " ms",
+            "condensed": true,
+            "withRowNumber": true
           },
-          "query_plan": {
-            "selects": [
-              {
-                "column": "predictions"
-              },
-              {
-                "function": "SUM",
-                "args": [
-                  {
-                    "column": "count(1)"
-                  }
-                ],
-                "alias": "column_9c62d65d17546"
-              }
-            ],
-            "groups": [
-              {
-                "column": "predictions"
-              }
-            ]
-          }
+          "query_plan": null
         }
       ]
     }
@@ -492,8 +491,8 @@
             "maxSizeX": 6,
             "minSizeY": 1,
             "maxSizeY": 1000,
-            "col": 2,
-            "row": 5
+            "col": 4,
+            "row": 13
           }
         },
         "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
@@ -516,7 +515,7 @@
             "maxSizeX": 6,
             "minSizeY": 1,
             "maxSizeY": 1000,
-            "col": 2,
+            "col": 4,
             "row": 0
           }
         },
@@ -543,7 +542,7 @@
           "parameterMappings": {}
         },
         "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
-        "text": "# Real Time Analytics with Databricks\n\n## From Ingestion & ML inferences to insight\nPowered by DLT & Project Lightspeed, this pipeline consumes data in realtime, run ML inferences fo filter fraudulent answer and save the output for real time insight.\n\n![img](https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/live-demo-flow-full-small2.png)"
+        "text": "# live.dbdemos.ai\n## Real-time Analytics with Databricks\n\n### From Ingestion & ML inferences to insight\nPowered by DLT & Project Lightspeed, this pipeline consumes data in realtime, run ML inferences fo filter fraudulent answer and save the output for real time insight.\n\n![img](https://raw.githubusercontent.com/databricks-demos/dbdemos-resources/main/images/live-demo-flow-full-small2.png)"
       },
       {
         "id": "2330dfe5-bd3e-4d6c-90d5-89bceac511db",
@@ -556,13 +555,13 @@
           "position": {
             "autoHeight": false,
             "sizeX": 2,
-            "sizeY": 10,
+            "sizeY": 8,
             "minSizeX": 1,
             "maxSizeX": 6,
             "minSizeY": 5,
             "maxSizeY": 1000,
             "col": 4,
-            "row": 7
+            "row": 5
           }
         },
         "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
@@ -580,13 +579,13 @@
           "position": {
             "autoHeight": false,
             "sizeX": 2,
-            "sizeY": 8,
+            "sizeY": 9,
             "minSizeX": 1,
             "maxSizeX": 6,
             "minSizeY": 5,
             "maxSizeY": 1000,
             "col": 2,
-            "row": 9
+            "row": 0
           }
         },
         "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
@@ -604,13 +603,13 @@
           "position": {
             "autoHeight": false,
             "sizeX": 2,
-            "sizeY": 7,
+            "sizeY": 8,
             "minSizeX": 1,
             "maxSizeX": 6,
             "minSizeY": 5,
             "maxSizeY": 1000,
-            "col": 4,
-            "row": 0
+            "col": 2,
+            "row": 9
           }
         },
         "dashboard_id": "98c5d5df-1f6c-4c63-84d4-760283c15846",
