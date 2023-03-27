@@ -19,7 +19,7 @@ class FirstnameModel(mlflow.pyfunc.PythonModel):
         #Download the list of valid firstnames
         firstname_local = '/tmp/firstnames.snappy.parquet'
         if not os.path.isfile(firstname_local):
-          with requests.get("https://github.com/databricks-demos/live-streaming-demo/raw/main/pipeline/firstnames.snappy.parquet", stream=True) as r:
+          with requests.get("https://github.com/databricks-demos/live-streaming-demo/raw/main/data/firstnames.snappy.parquet", stream=True) as r:
             r.raise_for_status()
             with open(firstname_local, 'wb') as f:
                 for chunk in r.iter_content(chunk_size=8192): 
