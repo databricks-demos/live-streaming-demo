@@ -2,19 +2,40 @@
     "clusters": [
         {
             "label": "default",
+            "spark_conf": {
+                "spark.master": "local[*, 4]",
+                "spark.databricks.cluster.profile": "singleNode"
+            },
             "aws_attributes": {
                 "instance_profile_arn": "arn:aws:iam::<AWS_ACCOUNT>:instance-profile/<INSTANCE_PROFILE_TO_READ_FROM_KINESIS>"
             },
-            "num_workers": 1
+            "custom_tags": {
+                "project": "dbdemos",
+                "demo-name": "live-streaming-dbdemos",
+                "Owner": "quentin.ambard@databricks.com",
+                "ResourceClass": "SingleNode",
+                "KeepAlive": "True"
+            },
+            "autoscale": {
+                "min_workers": 1,
+                "max_workers": 5,
+                "mode": "ENHANCED"
+            }
         },
         {
             "label": "maintenance",
+            "spark_conf": {
+                "spark.master": "local[*, 4]",
+                "spark.databricks.cluster.profile": "singleNode"
+            },
             "aws_attributes": {
                 "instance_profile_arn": "arn:aws:iam::<AWS_ACCOUNT>:instance-profile/<INSTANCE_PROFILE_TO_READ_FROM_KINESIS>"
             },
-             "custom_tags": {
+            "custom_tags": {
                 "project": "dbdemos",
+                "demo-name": "live-streaming-dbdemos",
                 "Owner": "quentin.ambard@databricks.com",
+                "ResourceClass": "SingleNode",
                 "KeepAlive": "True"
             }
         }
@@ -31,7 +52,7 @@
             }
         }
     ],
-    "name": "dbdemos_live_streaming_pipeline",
+    "name": "DO_NOT_DELETE_dbdemos_live_streaming_pipeline",
     "storage": "dbfs:/dbdemos/live_demo/dlt",
     "target": "dbdemos_live"
 }
